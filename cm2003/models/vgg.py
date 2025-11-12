@@ -1,0 +1,87 @@
+import torch
+import torch.nn as nn
+
+class VGG13(nn.Module):
+    """
+    VGG13 implementation for the CM2003 course lab, adapted for MNIST.
+    
+    This class implements a simplified VGG13 architecture, modified to work with
+    MNIST input (1 channel, 28x28 images).
+
+    Students should implement the network architecture following these steps:
+    1. Create the features section with convolutional and pooling layers.
+    2. Implement the adaptive average pooling layer.
+    3. Create the classifier section with fully connected layers.
+    4. Implement the forward method to define the data flow.
+
+    Args:
+        num_classes (int): Number of classes for the final classification layer. Default is 10.
+        in_channels (int): Number of input channels. Default is 1 for MNIST.
+    """
+
+    def __init__(self, num_classes=10, in_channels=1):
+        super(VGG13, self).__init__()
+    
+        # ---CODE START HERE---
+        # Step 1: Implement the features section
+        self.features = nn.Sequential(#TODO
+            # First block
+            # Conv2d: in_channels -> 64, 3x3 kernel, 1 padding
+            # ReLU
+            # Conv2d: 64 -> 64, 3x3 kernel, 1 padding
+            # ReLU
+            # MaxPool2d: 2x2 kernel, 2 stride
+            # Second block
+            # Conv2d: 64 -> 128, 3x3 kernel, 1 padding
+            # ReLU
+            # Conv2d: 128 -> 128, 3x3 kernel, 1 padding
+            # ReLU
+            # MaxPool2d: 2x2 kernel, 2 stride
+            # Third block
+            # Conv2d: 128 -> 256, 3x3 kernel, 1 padding
+            # ReLU
+            # Conv2d: 256 -> 256, 3x3 kernel, 1 padding
+            # ReLU
+            # MaxPool2d: 2x2 kernel, 2 stride
+            # Fourth block
+            # Conv2d: 256 -> 512, 3x3 kernel, 1 padding
+            # ReLU
+            # Conv2d: 512 -> 512, 3x3 kernel, 1 padding
+            # ReLU
+            # MaxPool2d: 2x2 kernel, 2 stride
+        )
+
+        # Step 2: Implement the adaptive average pooling layer
+        self.avgpool = None  # TODO: Use nn.AdaptiveAvgPool2d with output size (1, 1)
+
+        # Step 3: Implement the classifier section
+        self.classifier = nn.Sequential(#TODO
+            # Linear: 512 -> 4096
+            # ReLU
+            # Dropout
+            # Linear: 4096 -> 4096
+            # ReLU
+            # Dropout
+            # Linear: 4096 -> num_classes
+        )
+        # ---CODE END HERE---
+
+    def forward(self, x):
+        """
+        Define the forward pass of the VGG13 model.
+
+        Args:
+            x (torch.Tensor): Input tensor of shape (batch_size, 1, 28, 28)
+
+        Returns:
+            torch.Tensor: Output tensor of shape (batch_size, num_classes)
+        """
+        # ---CODE START HERE---
+        # Step 4: Implement the forward method
+        # Apply features
+        # Apply avgpool
+        # Flatten the tensor
+        # Apply classifier
+        # ---CODE END HERE---
+
+        return x
