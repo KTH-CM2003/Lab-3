@@ -14,18 +14,9 @@ def run_batch(model, data, target, criterion, optimizer, is_training=True):
     5. If training, perform backward pass and optimizer step
     """
     # ---CODE START HERE---
-    if is_training:
-        model.train()
-        optimizer.zero_grad()
-    else:
-        model.eval()
-
-    output = model(data)
-    loss = criterion(output, target.reshape(-1))
-
-    if is_training:
-        loss.backward()
-        optimizer.step()
+    # Hint: MedMNIST labels have shape (batch_size, 1), while nn.CrossEntropyLoss expects
+    # targets of shape (batch_size,), so use target.reshape(-1) when computing the loss.
+    loss = None
 
     # ---CODE END HERE---
 
@@ -87,15 +78,14 @@ def train_epoch(model, loader, criterion, optimizer, device):
     Complete the code between ---CODE START HERE--- and ---CODE END HERE---:
     1. Move data and target to the specified device
     2. Call run_batch with appropriate parameters
+    3. Add the batch loss to total_loss
     """
     model.train()
     total_loss = 0.0
 
     for data, target in loader:
         # ---CODE START HERE---
-        data, target = data.to(device), target.to(device)
-        loss = run_batch(model, data, target, criterion, optimizer)
-        total_loss += loss
+        pass
         # ---CODE END HERE---
 
     avg_loss = total_loss / len(loader)
@@ -107,7 +97,7 @@ def train(model, train_loader, val_loader, criterion, optimizer, device, num_epo
 
     Complete the code between ---CODE START HERE--- and ---CODE END HERE---:
     1. Call train_epoch with appropriate parameters
-    2. Store the returned train_loss and train_acc
+    2. Store the returned average training loss in train_loss
     """
     results = {
         'train_loss': [],
@@ -117,8 +107,8 @@ def train(model, train_loader, val_loader, criterion, optimizer, device, num_epo
 
     for epoch in range(num_epochs):
         # ---CODE START HERE---
-        train_loss = train_epoch(model, train_loader, criterion, optimizer, device)
-        
+        train_loss = None
+
         # ---CODE END HERE---
 
         results['train_loss'].append(train_loss)
